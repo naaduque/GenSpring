@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,43 +24,39 @@ public class UsuarioRepositoryTest {
 	private UsuarioRepository usuarioRepository;
 	
 	@BeforeAll
-	void start() {
-		
-		usuarioRepository.save(new Usuario(0L, "João da Silva", "joao@email.com.br", "13465278", ""));
-		
-		usuarioRepository.save(new Usuario(0L, "Manuela da Silva", "manuela@email.com.br", "13465278", ""));
-		
-		usuarioRepository.save(new Usuario(0L, "Adriana da Silva", "adriana@email.com.br", "13465278", ""));
-		
-        usuarioRepository.save(new Usuario(0L, "Paulo Antunes", "paulo@email.com.br", "13465278", ""));
-		
-	}
-	
-	@Test
-	@DisplayName("Retorna 1 usuário")
-	public void deveRetornarUmUsuario() {
-		
-		Optional<Usuario> usuario = usuarioRepository.findByUsuario("joao@email.com.br");
-		assertTrue(usuario.get().getUsuario().equals("joao@email.com.br"));		
-	}
-	
-	@Test
-	@DisplayName("Retorna 3 usuários")
-	public void deveRetornarTresUsuarios() {
-		
-		List<Usuario> listaUsuarios = usuarioRepository.findAllByNomeContainingIgnoreCase("Silva");
-		assertEquals(3, listaUsuarios.size());
-		assertTrue(listaUsuarios.get(0).getNome().equals("João da Silva"));
-		assertTrue(listaUsuarios.get(1).getNome().equals("Manuela da Silva"));
-		assertTrue(listaUsuarios.get(2).getNome().equals("Adriana da Silva"));
-		
-	}
-	
-	
-	@AfterAll
-	void end() {
+	void start(){
 		
 		usuarioRepository.deleteAll();
+
+		usuarioRepository.save(new Usuario(0L, "João da Silva", "joao@email.com.br", "13465278"));
+		
+		usuarioRepository.save(new Usuario(0L, "Manuela da Silva", "manuela@email.com.br", "13465278"));
+		
+		usuarioRepository.save(new Usuario(0L, "Adriana da Silva", "adriana@email.com.br", "13465278"));
+
+        usuarioRepository.save(new Usuario(0L, "Paulo Antunes", "paulo@email.com.br", "13465278"));
+
+	}
+	
+	@Test
+	@DisplayName(" Retorna 1 usuario")
+	public void deveRetornarUmUsuario() {
+
+		Optional<Usuario> usuario = usuarioRepository.findByUsuario("joao@email.com.br");
+		assertTrue(usuario.get().getUsuario().equals("joao@email.com.br"));
+	}
+
+	@Test
+	@DisplayName("Retorna 3 usuarios")
+	public void deveRetornarTresUsuarios() {
+
+		List<Usuario> listaDeUsuarios = usuarioRepository.findAllByNomeContainingIgnoreCase("Silva");
+		assertEquals(3, listaDeUsuarios.size());
+		assertTrue(listaDeUsuarios.get(0).getNome().equals("João da Silva"));
+		assertTrue(listaDeUsuarios.get(1).getNome().equals("Manuela da Silva"));
+		assertTrue(listaDeUsuarios.get(2).getNome().equals("Adriana da Silva"));
 		
 	}
+
+	
 }
